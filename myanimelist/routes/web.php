@@ -14,11 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/home', [\App\Http\Controllers\ListController::class, 'index'])->middleware(['auth', 'verified']);
+Route::get('/', function () {
+    return view('home.home');
+})->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::get('/profile', function () {
+    return view('profile.edit');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route::get('/home', [\App\Http\Controllers\ListController::class, 'index']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
