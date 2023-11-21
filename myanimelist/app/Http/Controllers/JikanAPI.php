@@ -12,31 +12,35 @@ class JikanAPI extends Controller
         $response = $client->request('GET', getenv('URL_BASE') . '/top/anime');
         $data = json_decode($response->getBody()->getContents(), true);
 
-// Assuming the structure is something like $data['anime'] => [{ 'title': 'Anime Title 1' }, { 'title': 'Anime Title 2' }, ...]
-        foreach ($data['data'] as $anime) {
-            $title = $anime['title'];
-            $image = $anime['images']['jpg']['image_url'];
-            $type = $anime['type'];
-            $genres = $anime['genres'][0]['name'];
-            $producers = $anime['producers'][0]['name'];
-            $episodes = $anime['episodes'];
-            $season = $anime['season'];
-            $year = $anime['year'];
-            $animeTitles[] = $title;
-            $animeImage[] = $image;
-            $animeType[] = $type;
-            $animeGenres[] = $genres;
-            $animeProducers[] = $producers;
-            $animeEpisodes[] = $episodes;
-            $animeSeason[] = $season;
-            $animeYear[] = $year;
-       
-        }
-        return view
-            ('home.coba',
-            ['animeTitles' => $animeTitles], ['animeImage' => $animeImage], ['animeType' => $animeType], ['animeGenres' => $animeGenres]
-            , ['animeProducers' => $animeProducers], ['animeEpisodes' => $animeEpisodes], ['animeSeason' => $animeSeason], ['animeYear' => $animeYear]);
+        if (!empty($data) && isset($data['data'])) {
+            $animeList = $data['data']; // Assuming 'data' contains the list of anime
+            $titles = [];
+            $synopsis = [];
+            $image = [];
+            $type = [];
+            $genres = [];
+            $producers = [];
+            $episodes = [];
+            $season = [];
+            $year = [];
 
+            // Loop through each anime and retrieve the title
+            foreach ($animeList as $anime) {
+                $titles[] = $anime['title'];
+                $synopsis[] = $anime['synopsis'];
+                $image[] = $anime['images']['jpg']['image_url'];
+                $type[] = $anime['type'];
+                $genres[] = $anime['genres'];
+                $producers[] = $anime['producers'][0]['name'];
+                $episodes[] = $anime['episodes'];
+                $season[] = $anime['season'];
+                $year[] = $anime['year'];
+            }
+            // dd($genres);
+            return view('home.home', [
+                'titles' => $titles, 'animeList' => $animeList, 'synopsis' => $synopsis, 'image' => $image, 'type' => $type, 'genres' => $genres, 'producers' => $producers, 'episodes' => $episodes, 'season' => $season, 'year' => $year,
+            ]);
+        }
     }
 
     // iki nek nduwur wes tak pilihke seng dinggo, tinggal apply nek blade

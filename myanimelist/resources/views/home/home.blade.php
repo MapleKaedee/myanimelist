@@ -14,7 +14,9 @@
                     <h1 class="text-5xl font-bold">Sword Art Online : Progressive</h1>
                     <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
                         exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                    <a class="btn bg-blue-600 dark:bg-slate-700 hover:dark:bg-slate-300 hover:dark:text-slate-700 text-white">Watch Now!</a>
+                    <a
+                        class="btn bg-blue-600 dark:bg-slate-700 hover:dark:bg-slate-300 hover:dark:text-slate-700 text-white">Watch
+                        Now!</a>
                 </div>
             </div>
         </div>
@@ -27,20 +29,21 @@
         </div>
         <div class="grid md:grid-cols-5 grid-cols-2 sm:grid-cols-3 gap-6">
             @foreach ($animeList as $anime)
-            <div class="card bg-base-100 dark:bg-slate-700 dark:text-white shadow-xl">
-                <figure><img src="https://i.pinimg.com/564x/b6/4e/4e/b64e4e6cf83da7959b22038ef7097105.jpg"
-                        alt="Shoes" /></figure>
-                <div class="m-4">
-                    <div class="mb-2">
-                        <h1 class="badge text-xs font-semibold">Action</h1>
-                    </div>
-                    <h2 class="card-title">{{ $anime['title'] }}</h2>
-                    <p class="textContainer dark:text-slate-300">{{ $anime['synopsis'] }}</p>
-                    <div class="card-actions justify-end flex items-end">
-                        <button class="btn btn-primary">Watch</button>
+                <div class="card bg-base-100 dark:bg-slate-700 dark:text-white shadow-xl">
+                    <figure><img src="" alt="Shoes" /></figure>
+                    <div class="m-4">
+                        <div class="mb-2">
+                            @foreach ($anime['genres'] as $genre)
+                                <h1 class="badge text-xs font-semibold">{{ $genre['name'] }}</h1>
+                            @endforeach
+                        </div>
+                        <h2 class="card-title">{{ $anime['title'] }}</h2>
+                        <p class="textContainer dark:text-slate-300">{{ $anime['synopsis'] }}</p>
+                        <div class="card-actions justify-end flex items-end">
+                            <button class="btn btn-primary">Watch</button>
+                        </div>
                     </div>
                 </div>
-            </div>
             @endforeach
 
         </div>
