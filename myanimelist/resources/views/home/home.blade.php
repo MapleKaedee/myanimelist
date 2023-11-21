@@ -1,7 +1,7 @@
 <x-nav-layout>
     {{-- HERO START --}}
     <div class="m-12">
-        <h1 class="mb-4 text-2xl font-bold dark:text-white">News</h1>
+        <h1 class="mb-4 text-2xl font-bold dark:text-white">Trending Now</h1>
         <div class="rounded-md hero bg-slate-50 dark:bg-slate-600 shadow-md dark:text-white">
             <div class="hero-content flex-col lg:flex-row">
                 <img src="https://i.pinimg.com/564x/e9/a2/3b/e9a23b37bc304e72db21ad2680b87ee5.jpg"
@@ -25,7 +25,7 @@
             <h1 class=" text-2xl font-bold align-middle">New Added</h1>
             <a class="btn btn-sm btn-outline btn-info dark:border-white dark:text-white" href="">Add New</a>
         </div>
-        <div class="grid grid-cols-5 gap-6">
+        <div class="grid md:grid-cols-5 grid-cols-2 sm:grid-cols-3 gap-6">
             <div class="card bg-base-100 dark:bg-slate-700 dark:text-white shadow-xl">
                 <figure><img src="https://i.pinimg.com/564x/b6/4e/4e/b64e4e6cf83da7959b22038ef7097105.jpg"
                         alt="Shoes" /></figure>
