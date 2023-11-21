@@ -7,6 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="shortcut icon" href="{{ asset('icon/lifebuoy.png') }}" type="image/png">
+
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -72,6 +74,7 @@
                         </ul>
                       </li> --}}
                                 <li><a href="/mylist" class="font-semibold">My List</a></li>
+                                <li><a href="/mydashboard/{id}" class="font-semibold">Dashboard</a></li>
                             </ul>
                         </div>
                         <a class="btn btn-ghost text-xl font-bold">My<span
@@ -89,7 +92,8 @@
                         </ul>
                       </details>
                     </li> --}}
-                            <li><a href="/mylist" class="font-semibold dark:hover:bg-slate-400">My List</a></li>
+                            <li><a href="/mylist/{id}" class="font-semibold dark:hover:bg-slate-400">My List</a></li>
+                            <li><a href="/mydashboard/{id}" class="font-semibold dark:hover:bg-slate-400">Dashboard</a></li>
                         </ul>
                     </div>
                     <div class="navbar-end gap-4">
@@ -109,20 +113,25 @@
                         </div>
                         <details class="dropdown dropdown-end">
                             @auth
-                                <summary class="m-1 btn">{{ auth()->user()->name }} <span><img class="rounded-full"
+                                <summary class="m-1 btn dark:bg-slate-700 dark:text-white dark:border-slate-500">{{ auth()->user()->name }} <span><img class="rounded-full"
                                             width="36"
                                             src="https://i.pinimg.com/564x/b6/4e/4e/b64e4e6cf83da7959b22038ef7097105.jpg"
                                             alt=""></span></summary>
-                                <ul class="mt-4 p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-md w-52 gap-2">
-                                    <li>
-                                        <form action="/logout" method="post">
-                                            @csrf
-                                            <button class="btn btn-outline btn-error btn-sm">LogOut</button>
-                                        </form>
-                                    </li>
-                                    <li><a href="{{ route('profile.edit') }}"
-                                            class="btn btn-outline btn-info btn-sm">Profile</a></li>
-                                </ul>
+                                            <ul class="mt-4 p-2 shadow menu dropdown-content z-[1] bg-base-100 dark:bg-slate-700 rounded-md w-52 gap-2">
+                                                <li class="w-full">
+                                                    <a href="" class="btn btn-outline btn-error btn-sm w-full">
+                                                        <form action="/logout" method="post">
+                                                            @csrf
+                                                            <button>LogOut</button>
+                                                        </form>
+                                                    </a>
+                                                </li>
+                                                <li class="w-full">
+                                                    <a href="{{ route('profile.edit') }}" class="btn btn-outline btn-info btn-sm w-full">Profile</a>
+                                                </li>
+                                            </ul>
+
+
                             @else
                                 <summary class="m-1 btn btn-outline-info">
                                     <a href="{{ route('login') }}"

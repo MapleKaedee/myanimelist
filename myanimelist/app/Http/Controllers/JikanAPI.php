@@ -32,6 +32,7 @@ class JikanAPI extends Controller
             $animeEpisodes[] = $episodes;
             $animeSeason[] = $season;
             $animeYear[] = $year;
+       
         }
         return view
             ('home.coba',
