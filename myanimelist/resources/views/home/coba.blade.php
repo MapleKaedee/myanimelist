@@ -17,8 +17,9 @@
             <div class="m-4">
                 <div class="badge badge-warning text-xs font-semibold">Action</div>
                 <h2 class="card-title">Bofuri</h2>
-                @foreach ($data as $dat)
-                    <p>{{ $dat }}</p>
+                {{ dd($animeTitles) }}
+                @foreach ($animeTitles as $anime)
+                    <li>{{ $anime }}</li>
                 @endforeach
 
                 <div class="card-actions justify-end">
