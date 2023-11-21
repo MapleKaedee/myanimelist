@@ -35,8 +35,8 @@
                         <h1 class="badge text-xs font-semibold">Action</h1>
                     </div>
                     <h2 class="card-title">{{ $anime['title'] }}</h2>
-                    <p class="dark:text-slate-300">Anime Kesukaan Wahit Ini</p>
-                    <div class="card-actions justify-end">
+                    <p class="textContainer dark:text-slate-300">{{ $anime['synopsis'] }}</p>
+                    <div class="card-actions justify-end flex items-end">
                         <button class="btn btn-primary">Watch</button>
                     </div>
                 </div>
@@ -45,4 +45,15 @@
 
         </div>
     </div>
+
+
+    <script>
+        var textContainers = document.querySelectorAll('.textContainer');
+
+        textContainers.forEach(function(container) {
+            var originalText = container.innerHTML;
+            var limitedText = originalText.substring(0, 50); // Ambil 50 karakter pertama
+            container.innerHTML = limitedText;
+        });
+    </script>
 </x-nav-layout>

@@ -15,13 +15,16 @@ class ListController extends Controller
     if (!empty($data) && isset($data['data'])) {
         $animeList = $data['data']; // Assuming 'data' contains the list of anime
         $titles = [];
+        $synopsis = [];
 
         // Loop through each anime and retrieve the title
         foreach ($animeList as $anime) {
             $titles[] = $anime['title'];
+            $synopsis[] = $anime['synopsis'];
         }
+        // dd($data);
 
-        return view('home.home', ['titles' => $titles, 'animeList' => $animeList]);
+        return view('home.home', ['titles' => $titles, 'animeList' => $animeList, 'synopsis'=> $synopsis]);
     } else {
         echo "No data found or unexpected data structure";
     }
