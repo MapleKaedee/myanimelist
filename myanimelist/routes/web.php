@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\JikanAPI;
+use App\Http\Controllers\ListController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\myListController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\myDashboardController;
 

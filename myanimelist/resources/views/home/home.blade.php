@@ -26,6 +26,7 @@
             <a class="btn btn-sm btn-outline btn-info dark:border-white dark:text-white" href="">Add New</a>
         </div>
         <div class="grid md:grid-cols-5 grid-cols-2 sm:grid-cols-3 gap-6">
+            @foreach ($animeList as $anime)
             <div class="card bg-base-100 dark:bg-slate-700 dark:text-white shadow-xl">
                 <figure><img src="https://i.pinimg.com/564x/b6/4e/4e/b64e4e6cf83da7959b22038ef7097105.jpg"
                         alt="Shoes" /></figure>
@@ -33,55 +34,14 @@
                     <div class="mb-2">
                         <h1 class="badge text-xs font-semibold">Action</h1>
                     </div>
-                    <h2 class="card-title">Bofuri</h2>
+                    <h2 class="card-title">{{ $anime['title'] }}</h2>
                     <p class="dark:text-slate-300">Anime Kesukaan Wahit Ini</p>
                     <div class="card-actions justify-end">
                         <button class="btn btn-primary">Watch</button>
                     </div>
                 </div>
             </div>
-            <div class="card bg-base-100 shadow-xl dark:bg-slate-700 dark:text-white">
-                <figure><img src="https://i.pinimg.com/564x/b6/4e/4e/b64e4e6cf83da7959b22038ef7097105.jpg"
-                        alt="Shoes" /></figure>
-                <div class="m-4">
-                    <div class="mb-2">
-                        <h1 class="badge text-xs font-semibold">Action</h1>
-                    </div>
-                    <h2 class="card-title">Bofuri</h2>
-                    <p class="dark:text-slate-300">Anime Kesukaan Wahit Ini</p>
-                    <div class="card-actions justify-end">
-                        <button class="btn btn-primary">Watch</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card bg-base-100 shadow-xl dark:bg-slate-700 dark:text-white">
-                <figure><img src="https://i.pinimg.com/564x/b6/4e/4e/b64e4e6cf83da7959b22038ef7097105.jpg"
-                        alt="Shoes" /></figure>
-                <div class="m-4">
-                    <div class="mb-2">
-                        <h1 class="badge text-xs font-semibold">Action</h1>
-                    </div>
-                    <h2 class="card-title">Bofuri</h2>
-                    <p class="dark:text-slate-300">Anime Kesukaan Wahit Ini</p>
-                    <div class="card-actions justify-end">
-                        <button class="btn btn-primary">Watch</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card bg-base-100 shadow-xl dark:bg-slate-700 dark:text-white">
-                <figure><img src="https://i.pinimg.com/564x/b6/4e/4e/b64e4e6cf83da7959b22038ef7097105.jpg"
-                        alt="Shoes" /></figure>
-                <div class="m-4">
-                    <div class="mb-2">
-                        <h1 class="badge text-xs font-semibold">Action</h1>
-                    </div>
-                    <h2 class="card-title">Bofuri</h2>
-                    <p class="dark:text-slate-300">Anime Kesukaan Wahit Ini</p>
-                    <div class="card-actions justify-end">
-                        <button class="btn btn-primary">Watch</button>
-                    </div>
-                </div>
-            </div>
+            @endforeach
 
         </div>
     </div>

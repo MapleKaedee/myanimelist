@@ -18,7 +18,7 @@ class JikanAPI extends Controller
             // Loop through each anime and retrieve the title
             foreach ($animeList as $anime) {
                 $title = $anime['title'];
-                echo "Title: $title <br>";
+                return view('home.home', ['title'=> $title,''=> $anime]);
             }
         } else {
             echo "No data found or unexpected data structure";
