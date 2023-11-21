@@ -17,7 +17,10 @@
             <div class="m-4">
                 <div class="badge badge-warning text-xs font-semibold">Action</div>
                 <h2 class="card-title">Bofuri</h2>
-                <p>Anime Kesukaan Wahit Ini</p>
+                @foreach ($data as $dat)
+                    <p>{{ $dat }}</p>
+                @endforeach
+
                 <div class="card-actions justify-end">
                     <button class="btn btn-primary">Watch</button>
                 </div>

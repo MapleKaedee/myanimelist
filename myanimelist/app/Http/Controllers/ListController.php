@@ -13,4 +13,9 @@ class ListController extends Controller
     {
         return view("profile.edit");
     }
+
+    public function coba()
+    {
+        return view("home.coba");
+    }
 }

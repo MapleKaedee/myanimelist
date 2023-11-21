@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JikanAPI;
 use App\Http\Controllers\ListController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -17,9 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ListController::class, 'index'])->name('home');
 Route::get('/profile', [ProfileController::class, 'edit'])->name('dashboard')->middleware(['auth', 'verified']);
-Route::get('/coba', function () {
-    return view('home.coba');
-});
+Route::get('/coba', [ListController::class, 'coba']);
+Route::get('/anime', [JikanAPI::class, 'index']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
