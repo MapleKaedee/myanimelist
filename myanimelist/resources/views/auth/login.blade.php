@@ -31,24 +31,34 @@
                 <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
             </label>
         </div>
-
-        <div class="flex items-center justify-end mt-4">
+        <div class="flex items-center justify-center mt-4">
             @if (Route::has('password.request'))
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     href="{{ route('password.request') }}">
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
-            @if (Route::has('register'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    href="{{ route('register') }}">
-                    {{ __('Dont Have An Account?') }}
-                </a>
-            @endif
-
+            <div class="flex justify-items-center items-center justify-center mt-6">
+                @if (Route::has('register'))
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        href="{{ route('register') }}">
+                        {{ __('Dont Have An Account?') }}
+                    </a>
+                @endif
+            </div>
             <x-primary-button class="ms-3">
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
+
+        <div class="text-center mt-4">
+            <p>Or Login With</p>
+            {{-- icon social media --}}
+            <a href="{{ route('auth.google') }}">
+                <i class="bi bi-google" style="color:red;font-size:30px; margin:5px"></i>
+            </a>
+            <i class="bi bi-github" style="color:black;font-size:30px; margin:5px"></i>
+        </div>
+
     </form>
 </x-guest-layout>

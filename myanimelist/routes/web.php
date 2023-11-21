@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\JikanAPI;
 use App\Http\Controllers\myDashboardController;
 use App\Http\Controllers\myListController;
@@ -26,6 +27,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/mylist/{id}', [myListController::class, 'index']);
     Route::get('/mydashboard/{id}', [myDashboardController::class, 'index']);
+});
+
+Route::controller(GoogleController::class)->group(function () {
+    Route::get('/auth/google', 'redirectToGoogle')->name('auth.google');
+    Route::get('/auth/google/callback', 'handleGoogleCallback');
 });
 
 require __DIR__ . '/auth.php';
