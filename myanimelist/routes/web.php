@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\myListController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\myDashboardController;
 
@@ -16,19 +14,10 @@ use App\Http\Controllers\myDashboardController;
 |
  */
 
-Route::get('/', function () {
-    return view('home.home');
-})->name('home');
-
-Route::get('/coba', function () {
-    return view('home.coba');
-});
-
-Route::get('/profile', function () {
-    return view('profile.edit');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::get('/home', [\App\Http\Controllers\ListController::class, 'index']);
+Route::get('/', [ListController::class, 'index'])->name('home');
+Route::get('/profile', [ProfileController::class, 'edit'])->name('dashboard')->middleware(['auth', 'verified']);
+Route::get('/coba', [ListController::class, 'coba']);
+Route::get('/anime', [JikanAPI::class, 'index']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -37,9 +26,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/mylist/{id}', [myListController::class, 'index']);
     Route::get('/mydashboard/{id}', [myDashboardController::class,'index']);
 });
-
-Route::get('/cek1', function () {
-    return '<h1>cek1</h1>';
-})->middleware(['auth', 'verified']);
 
 require __DIR__ . '/auth.php';
