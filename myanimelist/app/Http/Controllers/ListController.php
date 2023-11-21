@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class ListController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view("home.home");
+    }
+
+    public function profile()
+    {
+        return view("profile.edit");
+    }
+
+    public function coba()
+    {
+        return view("home.coba");
     }
 }
