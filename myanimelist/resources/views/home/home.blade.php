@@ -4,16 +4,13 @@
         <h1 class="mb-4 text-2xl font-bold dark:text-white">Trending Now</h1>
         <div class="rounded-md hero bg-slate-50 dark:bg-slate-600 shadow-md dark:text-white">
             <div class="hero-content flex-col lg:flex-row">
-                <img src="https://i.pinimg.com/564x/e9/a2/3b/e9a23b37bc304e72db21ad2680b87ee5.jpg"
-                    class="h-64 rounded-lg shadow-2xl" />
+                <img src="{{ $specificAninme['images']['jpg']['image_url'] }}" class="h-64 rounded-lg shadow-2xl" />
                 <div>
                     <div class="flex gap-2 my-2">
-                        <h1 class="badge badge-outline">Action</h1>
-                        <h1 class="badge badge-outline">Drama</h1>
+                        <h1 class="badge badge-outline">{{ $specificAninme['genres'][0]['name'] }}</h1>
                     </div>
-                    <h1 class="text-5xl font-bold">Sword Art Online : Progressive</h1>
-                    <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
-                        exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+                    <h1 class="text-5xl font-bold">{{ $specificAninme['title'] }}</h1>
+                    <p class="py-6">{{ $specificAninme['synopsis'] }}</p>
                     <a
                         class="btn bg-blue-600 dark:bg-slate-700 hover:dark:bg-slate-300 hover:dark:text-slate-700 text-white">Watch
                         Now!</a>
@@ -28,9 +25,18 @@
             <a class="btn btn-sm btn-outline btn-info dark:border-white dark:text-white" href="">Add New</a>
         </div>
         <div class="grid md:grid-cols-5 grid-cols-2 sm:grid-cols-3 gap-6">
-            @foreach ($animeList as $anime)
+            @foreach ($animes as $anime)
                 <div class="card bg-base-100 dark:bg-slate-700 dark:text-white shadow-xl">
-                    <figure><img src="" alt="Shoes" /></figure>
+                    <figure>
+                        @foreach ($anime['images'] as $imageType => $image)
+                            @if ($imageType === 'jpg')
+                                <img class="aspect-auto" src="{{ $image['image_url'] }}"
+                                    alt="{{ $image['large_image_url'] }}" />
+                            @endif
+                        @endforeach
+
+                    </figure>
+
                     <div class="m-4">
                         <div class="mb-2">
                             @foreach ($anime['genres'] as $genre)
@@ -48,6 +54,7 @@
 
         </div>
     </div>
+
 
 
     <script>
