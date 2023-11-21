@@ -17,11 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', [JikanAPI::class, 'anime'])->name('home');
+Route::get('/', [JikanAPI::class, 'showView'])->name('home');
 Route::get('/profile', [ProfileController::class, 'edit'])->name('dashboard')->middleware(['auth', 'verified']);
-// Route::get('/coba', [JikanAPI::class, 'anime']);
-Route::get('/anime', [JikanAPI::class, 'anime']);
-Route::get('/animee', [JikanAPI::class, 'animeseason']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

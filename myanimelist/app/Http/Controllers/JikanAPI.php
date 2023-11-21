@@ -9,53 +9,49 @@ class JikanAPI extends Controller
     public function anime()
     {
         $client = new Client();
-        $response = $client->request('GET', getenv('URL_BASE') . '/top/anime');
+        $response = $client->request('GET', getenv('URL_BASE') . '/seasons/now');
         $data = json_decode($response->getBody()->getContents(), true);
 
         if (!empty($data) && isset($data['data'])) {
-            $animeList = $data['data']; // Assuming 'data' contains the list of anime
-            $titles = [];
-            $synopsis = [];
-            $image = [];
-            $type = [];
-            $genres = [];
-            $producers = [];
-            $episodes = [];
-            $season = [];
-            $year = [];
+            $animeList = $data['data'];
+            $animes = [];
 
-            // Loop through each anime and retrieve the title
+            // Loop through each anime and retrieve the data
             foreach ($animeList as $anime) {
-                $titles[] = $anime['title'];
-                $synopsis[] = $anime['synopsis'];
-                $image[] = $anime['images']['jpg']['image_url'];
-                $type[] = $anime['type'];
-                $genres[] = $anime['genres'];
-                $producers[] = $anime['producers'][0]['name'];
-                $episodes[] = $anime['episodes'];
-                $season[] = $anime['season'];
-                $year[] = $anime['year'];
+                $animes[] = [
+                    'title' => $anime['title'],
+                    'synopsis' => $anime['synopsis'],
+                    'images' => $anime['images'],
+                    'type' => $anime['type'],
+                    'genres' => $anime['genres'],
+                    'producer' => $anime['producers'][0]['name'],
+                    'episodes' => $anime['episodes'],
+                    'season' => $anime['season'],
+                    'year' => $anime['year'],
+                ];
             }
-            // dd($genres);
-            return view('home.home', [
-                'titles' => $titles, 'animeList' => $animeList, 'synopsis' => $synopsis, 'image' => $image, 'type' => $type, 'genres' => $genres, 'producers' => $producers, 'episodes' => $episodes, 'season' => $season, 'year' => $year,
-            ]);
+
+            return $animes;
         }
+        return [];
     }
-
-    // iki nek nduwur wes tak pilihke seng dinggo, tinggal apply nek blade
-
-    public function animeseason()
+    public function getAnime()
     {
         $client = new Client();
-        $response = $client->request('GET', getenv('URL_BASE') . '/seasons/2023/fall');
-        $data = json_decode($response->getBody()->getContents(), true);
+        $response = $client->request('GET', 'https://api.jikan.moe/v4/anime/41514');
+        $data = json_decode($response->getBody(), true);
 
-        foreach ($data['data'] as $anime) {
+        $specificAninme = $data['data'];
+        return $specificAninme;
+    }
 
-            $title = $anime['title'];
-            $animeTitles[] = $title;
-        }
-        dd($animeTitles);
+    public function showView()
+    {
+        $animes = $this->anime();
+        $specificAninme = $this->getAnime();
+
+        return view('home.home')
+            ->with('animes', $animes)
+            ->with('specificAninme', $specificAninme);
     }
 }
