@@ -13,7 +13,9 @@
 <body class="m-12">
     <div class="grid grid-cols-5">
         <div class="card bg-base-100 shadow-xl">
-            <figure><img src="" alt="gambar card" /></figure>
+            @foreach ($animeImage as $anime)
+                <figure><img src={{ $anime }} alt="gambar card" /></figure>
+            @endforeach
             <div class="m-4">
                 <div class="badge badge-warning text-xs font-semibold">Action</div>
                 <h2 class="card-title">Bofuri</h2>
