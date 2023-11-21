@@ -20,8 +20,8 @@ use App\Http\Controllers\myDashboardController;
 
 Route::get('/', [ListController::class, 'index'])->name('home');
 Route::get('/profile', [ProfileController::class, 'edit'])->name('dashboard')->middleware(['auth', 'verified']);
-Route::get('/coba', [ListController::class, 'coba']);
-Route::get('/anime', [JikanAPI::class, 'index']);
+Route::get('/coba', [JikanAPI::class, 'anime']);
+Route::get('/anime', [JikanAPI::class, 'anime']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
