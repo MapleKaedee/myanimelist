@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ListController::class, 'index'])->name('home');
 Route::get('/profile', [ProfileController::class, 'edit'])->name('dashboard')->middleware(['auth', 'verified']);
-Route::get('/coba', [ListController::class, 'coba']);
+Route::get('/coba', [JikanAPI::class, 'anime']);
 Route::get('/anime', [JikanAPI::class, 'anime']);
 
 Route::middleware('auth')->group(function () {
