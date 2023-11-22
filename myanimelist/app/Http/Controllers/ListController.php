@@ -14,4 +14,9 @@ class ListController extends Controller
     {
         return view("home.coba");
     }
+
+    public function home()
+    {
+        return view("home.home");
+    }
 }
