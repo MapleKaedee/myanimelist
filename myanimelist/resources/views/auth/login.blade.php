@@ -29,18 +29,18 @@
                 <label for="remember_me" class="inline-flex items-center">
                     <input id="remember_me" type="checkbox"
                         class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                    <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                    <span class="ms-2 text-sm text-gray-600 dark:text-slate-300">{{ __('Remember me') }}</span>
                 </label>
             </div>
             <div class="flex items-center justify-center gap-6 mt-4">
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    <a class="underline text-sm dark:text-slate-300 dark:hover:text-slate-400 text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
                 @if (Route::has('register'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    <a class="underline text-sm dark:text-slate-300 dark:hover:text-slate-400 text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         href="{{ route('register') }}">
                         {{ __('Dont Have An Account?') }}
                     </a>
@@ -57,14 +57,14 @@
 
 
             <div class="text-center mt-4">
-                <p>Or Login With</p>
+                <p class="dark:text-slate-300">Or Login With</p>
                 {{-- icon social media --}}
                 <div class="flex gap-4 justify-center">
                     <a href="{{ route('auth.google') }}">
-                        <i class="bi bi-google" style="font-size:30px; margin:5px"></i>
+                        <i class="bi bi-google dark:text-slate-300" style="font-size:24px; margin:5px"></i>
                     </a>
                     <a href="">
-                        <i class="bi bi-github" style="color:black;font-size:30px; margin:5px"></i>
+                        <i class="bi bi-github dark:text-slate-300" style="font-size:24px; margin:5px"></i>
                     </a>
                 </div>
             </div>

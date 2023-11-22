@@ -41,7 +41,7 @@
 
             @if (session('status') === 'password-updated')
                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600">{{ __('Saved.') }}</p>
+                    class="text-sm text-gray-600 dark:text-slate-800 p-1.5 bg-green-400 rounded-md">{{ __('Saved.') }}</p>
             @endif
         </div>
     </form>

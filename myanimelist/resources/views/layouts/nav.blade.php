@@ -77,7 +77,7 @@
                                 <li><a href="/mydashboard/{id}" class="font-semibold">Dashboard</a></li>
                             </ul>
                         </div>
-                        <a class="btn btn-ghost text-xl font-bold">My<span
+                        <a href="/" class="btn btn-ghost text-xl font-bold">My<span
                                 class="-mx-1.5 text-blue-500">Anime</span>List</a>
                     </div>
                     <div class="navbar-center hidden lg:flex">
