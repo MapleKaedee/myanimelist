@@ -104,6 +104,7 @@ class JikanAPI extends Controller
 
     public function showView()
     {
+
         $paginatedData = $this->Anime();
         $specificAnime = $this->getAnime();
 

@@ -66,7 +66,6 @@
             @if ($currentPage < $lastPage - 2)
                 <button class="join-item btn btn-disabled">...</button>
             @endif
-
             <button class="join-item btn"
                 onclick="window.location='{{ $paginatedData->url($lastPage - 1) }}'">{{ $lastPage - 1 }}</button>
             <button class="join-item btn"
@@ -82,7 +81,17 @@
         textContainers.forEach(function(container) {
             var originalText = container.innerHTML;
             var limitedText = originalText.substring(0, 50); // Ambil 50 karakter pertama
-            container.innerHTML = limitedText;
+            var truncatedText = limitedText + (originalText.length > 50 ? '...' : '') // Tambahkan elipsis jika teks lebih dari 50 karakter
+            container.innerHTML = truncatedText;
+        });
+
+        var textContainers = document.querySelectorAll('.textTitleContainer');
+
+        textContainers.forEach(function(container) {
+            var originalText = container.innerHTML;
+            var limitedText = originalText.substring(0, 200); // Ambil 200 karakter pertama
+            var truncatedText = limitedText + (originalText.length > 200 ? '...' : ''); // Tambahkan elipsis jika teks lebih dari 200 karakter
+            container.innerHTML = truncatedText;
         });
     </script>
 </x-nav-layout>
