@@ -41,17 +41,17 @@ class JikanAPI extends Controller
         $response = $client->request('GET', 'https://api.jikan.moe/v4/anime/41514');
         $data = json_decode($response->getBody(), true);
 
-        $specificAninme = $data['data'];
-        return $specificAninme;
+        $specificAnime = $data['data'];
+        return $specificAnime;
     }
 
     public function showView()
     {
         $animes = $this->anime();
-        $specificAninme = $this->getAnime();
+        $specificAnime = $this->getAnime();
 
         return view('home.home')
             ->with('animes', $animes)
-            ->with('specificAninme', $specificAninme);
+            ->with('specificAnime', $specificAnime);
     }
 }
