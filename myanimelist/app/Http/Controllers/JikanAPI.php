@@ -2,16 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 class JikanAPI extends Controller
 {
-    private function FetchAnime()
+    private function fetchAnime()
     {
+        // Check if data is cached
+        if (Cache::has('cachedAnimeData')) {
+            return Cache::get('cachedAnimeData');
+        }
+
         $client = new Client();
         $allAnime = [];
         $animeCount = 0;
@@ -28,29 +35,18 @@ class JikanAPI extends Controller
                 if ($statusCode == 200) {
                     $data = json_decode($response->getBody(), true);
 
-                    // Hitung berapa banyak anime yang sudah diambil
-                    $currentAnimeCount = count($data['data']);
-                    $remainingSpace = 200 - $animeCount;
-
-                    // Jika anime yang diterima lebih dari ruang yang tersisa, ambil sebagian data yang cukup
-                    if ($currentAnimeCount > $remainingSpace) {
-                        $data['data'] = array_slice($data['data'], 0, $remainingSpace);
-                    }
+                    // ... (proses data seperti sebelumnya)
 
                     // Masukkan data dari halaman saat ini ke dalam array semua anime
                     $allAnime = array_merge($allAnime, $data['data']);
 
-                    // Update informasi paginasi
-                    $currentPage = $data['pagination']['current_page'];
-                    $lastPage = $data['pagination']['last_visible_page'];
-
-                    // Tambahkan jumlah anime yang telah diambil
-                    $animeCount += $currentAnimeCount;
+                    // ...
 
                     // Tambahkan waktu tunggu sebelum melakukan permintaan berikutnya
-                    usleep(200000); // Delay 200ms (2/10 detik) sebelum melakukan permintaan lagi
+                    usleep(500000); // Delay 300ms (3/10 detik) sebelum melakukan permintaan lagi
 
-                    // Periksa apakah ada halaman selanjutnya
+                    // ...
+
                     if ($animeCount < 200 && $data['pagination']['has_next_page']) {
                         $currentPage++; // Pindah ke halaman selanjutnya
                     }
@@ -67,7 +63,11 @@ class JikanAPI extends Controller
                 // Handle jika terjadi exception lainnya
                 return response('Failed to fetch data from API: ' . $e->getMessage());
             }
-        } while ($animeCount < 200 && $currentPage <= $lastPage); // Lakukan permintaan berulang sampai batas 100 anime tercapai
+        } while ($animeCount < 200 && $currentPage <= $lastPage);
+
+        // Cache the fetched data for future use
+        Cache::put('cachedAnimeData', $allAnime, Carbon::now()->addMinutes(60)); // Cache for 60 minutes
+
         return $allAnime;
     }
 
