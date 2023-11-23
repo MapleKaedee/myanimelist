@@ -43,7 +43,7 @@ class JikanAPI extends Controller
                     // ...
 
                     // Tambahkan waktu tunggu sebelum melakukan permintaan berikutnya
-                    usleep(500000); // Delay 300ms (3/10 detik) sebelum melakukan permintaan lagi
+                    usleep(300000); // Delay 300ms (3/10 detik) sebelum melakukan permintaan lagi
 
                     // ...
 
