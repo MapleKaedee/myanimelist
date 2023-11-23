@@ -21,6 +21,13 @@
         </div>
     </div>
     {{-- HERO END --}}
+    <div class="join">
+        <form method="GET" action="{{ url('/search') }}">
+            <input class="input input-bordered join-item" type="text" name="anime_name"
+                placeholder="Enter Anime Name" />
+            <button class="btn join-item rounded-r-full" type="submit">Search</button>
+        </form>
+    </div>
     <div class="m-12">
         <div class="flex justify-between items-center mb-4 dark:text-white">
             <h1 class="text-2xl font-bold align-middle">New Added</h1>
@@ -50,26 +57,14 @@
                 $currentPage = $paginatedData->currentPage();
                 $lastPage = $paginatedData->lastPage();
             @endphp
+            <button class="join-item btn {{ $currentPage == 1 ? 'disabled' : '' }}"
+                @if ($currentPage != 1) onclick="window.location='{{ $paginatedData->previousPageUrl() }}'" @endif>«</button>
 
-            <button class="join-item btn" onclick="window.location='{{ $paginatedData->url(1) }}'">1</button>
-            <button class="join-item btn" onclick="window.location='{{ $paginatedData->url(2) }}'">2</button>
+            <!-- Tampilkan tombol nomor halaman -->
+            <button class="join-item btn" disabled>Page {{ $currentPage }}</button>
 
-            @if ($currentPage > 3)
-                <button class="join-item btn btn-disabled">...</button>
-            @endif
-
-            @for ($i = max(3, $currentPage - 1); $i <= min($currentPage + 1, $lastPage - 1); $i++)
-                <button class="join-item btn {{ $i == $currentPage ? 'active' : '' }}"
-                    onclick="window.location='{{ $paginatedData->url($i) }}'">{{ $i }}</button>
-            @endfor
-
-            @if ($currentPage < $lastPage - 2)
-                <button class="join-item btn btn-disabled">...</button>
-            @endif
-            <button class="join-item btn"
-                onclick="window.location='{{ $paginatedData->url($lastPage - 1) }}'">{{ $lastPage - 1 }}</button>
-            <button class="join-item btn"
-                onclick="window.location='{{ $paginatedData->url($lastPage) }}'">{{ $lastPage }}</button>
+            <button class="join-item btn {{ $currentPage == $lastPage ? 'disabled' : '' }}"
+                @if ($currentPage != $lastPage) onclick="window.location='{{ $paginatedData->nextPageUrl() }}'" @endif>»</button>
         </div>
     </div>
 
@@ -81,7 +76,8 @@
         textContainers.forEach(function(container) {
             var originalText = container.innerHTML;
             var limitedText = originalText.substring(0, 50); // Ambil 50 karakter pertama
-            var truncatedText = limitedText + (originalText.length > 50 ? '...' : '') // Tambahkan elipsis jika teks lebih dari 50 karakter
+            var truncatedText = limitedText + (originalText.length > 50 ? '...' :
+                '') // Tambahkan elipsis jika teks lebih dari 50 karakter
             container.innerHTML = truncatedText;
         });
 
@@ -90,7 +86,8 @@
         textContainers.forEach(function(container) {
             var originalText = container.innerHTML;
             var limitedText = originalText.substring(0, 200); // Ambil 200 karakter pertama
-            var truncatedText = limitedText + (originalText.length > 200 ? '...' : ''); // Tambahkan elipsis jika teks lebih dari 200 karakter
+            var truncatedText = limitedText + (originalText.length > 200 ? '...' :
+                ''); // Tambahkan elipsis jika teks lebih dari 200 karakter
             container.innerHTML = truncatedText;
         });
     </script>

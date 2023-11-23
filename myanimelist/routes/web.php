@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\JikanAPI;
 use App\Http\Controllers\myDashboardController;
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [JikanAPI::class, 'showView'])->name('home');
 Route::get('/profile', [ProfileController::class, 'edit'])->name('dashboard')->middleware(['auth', 'verified']);
+Route::get('/search', [AnimeController::class, 'getAnime'])->name('search');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
