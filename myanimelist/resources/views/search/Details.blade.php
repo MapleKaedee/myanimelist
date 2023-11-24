@@ -1,32 +1,5 @@
 <x-nav-layout>
     <div class="m-12">
-        <h1 class="mb-4 text-2xl font-bold dark:text-white">Trending Now</h1>
-        <div class="rounded-md hero bg-slate-50 dark:bg-slate-600 shadow-md dark:text-white">
-            <div class="hero-content flex-col lg:flex-row">
-                <img src="{{ $specificAnime['images']['jpg']['image_url'] }}" class="h-64 rounded-lg shadow-2xl" />
-                <div>
-                    <div class="flex gap-2 my-2">
-                        @foreach ($specificAnime['genres'] as $specAnime)
-                            <h1 class="badge badge-outline">{{ $specAnime['name'] }}</h1>
-                        @endforeach
-                    </div>
-                    <h1 class="text-5xl font-bold">{{ $specificAnime['title'] }}</h1>
-                    <p class="py-6 textTitleContainer">{{ $specificAnime['synopsis'] }}</p>
-                    <a
-                        class="btn bg-blue-600 dark:bg-slate-700 hover:dark:bg-slate-300 hover:dark:text-slate-700 text-white">See
-                        Details</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="mx-12 mt-12">
-        <form method="GET" action="{{ url('/search') }}">
-            <input class="input input-bordered w-full max-w-xs dark:bg-slate-400" type="text" name="anime_name"
-                placeholder="Enter Anime Name" />
-            <button class="btn btn-outline dark:text-slate-100 dark:border-slate-100" type="submit">Search</button>
-        </form>
-    </div>
-    <div class="m-12">
         <div class="grid md:grid-cols-5 grid-cols-2 sm:grid-cols-3 gap-6">
             @if (isset($animeData))
                 @foreach ($animeData as $anime)

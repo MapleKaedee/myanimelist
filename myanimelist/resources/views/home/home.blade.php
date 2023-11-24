@@ -41,26 +41,27 @@
                     </figure>
                     <div class="m-4">
                         <div class="mb-2">
-                            <h1 class="badge text-xs font-semibold
-                            @if ($anime['type'] == 'TV' )
-                                badge-primary
-                            @elseif ($anime['type'] == 'Movie' )
-                                badge-secondary
-                            @elseif ($anime['type'] == 'Special')
-                                badge-accent text-white
-                            @elseif ($anime['type'] == 'OVA' )
-                                badge-info text-white
-                            @endif">{{ $anime['type'] }}</h1>
+                            <h1
+                                class="badge text-xs font-semibold
+                        @if ($anime['type'] == 'TV') badge-primary
+                        @elseif ($anime['type'] == 'Movie')
+                            badge-secondary
+                        @elseif ($anime['type'] == 'Special')
+                            badge-accent text-white
+                        @elseif ($anime['type'] == 'OVA')
+                            badge-info text-white @endif">
+                                {{ $anime['type'] }}</h1>
                         </div>
                         <div class="mb-2">
                             @foreach ($anime['genres'] as $genre)
-                            <h1 class="badge text-xs font-semibold">{{ $genre['name'] }}</h1>
+                                <h1 class="badge text-xs font-semibold">{{ $genre['name'] }}</h1>
                             @endforeach
                         </div>
                         <h2 class="card-title">{{ $anime['title'] }}</h2>
                         <p class="textContainer dark:text-slate-300">{{ $anime['synopsis'] }}</p>
                         <div class="card-actions justify-end flex items-end">
-                            <button class="btn btn-primary">Watch</button>
+                            <button class="btn btn-primary anime-button"
+                                data-anime-id="{{ $anime['mal_id'] }}">Details</button>
                         </div>
                     </div>
                 </div>
@@ -75,13 +76,31 @@
                 <button class="join-item btn dark:bg-slate-400 {{ $currentPage == 1 ? 'disabled' : '' }}"
                     @if ($currentPage != 1) onclick="window.location='{{ $paginatedData->previousPageUrl() }}'" @endif>«</button>
                 <!-- Tampilkan tombol nomor halaman -->
-                <button class="join-item btn dark:bg-slate-600 dark:border-slate-100 dark:text-slate-100" disabled>Page {{ $currentPage }}</button>
+                <button class="join-item btn dark:bg-slate-600 dark:border-slate-100 dark:text-slate-100" disabled>Page
+                    {{ $currentPage }}</button>
                 <button class="join-item btn dark:bg-slate-400 {{ $currentPage == $lastPage ? 'disabled' : '' }}"
                     @if ($currentPage != $lastPage) onclick="window.location='{{ $paginatedData->nextPageUrl() }}'" @endif>»</button>
             </div>
         </div>
     </div>
 
+
+    <script>
+        // Mengambil semua elemen tombol anime
+        const animeButtons = document.querySelectorAll('.anime-button');
+
+        // Menambahkan event listener untuk setiap tombol anime
+        animeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Mengambil ID anime dari atribut data-anime-id
+                const animeId = button.getAttribute('data-anime-id');
+
+                // Mengarahkan ke halaman baru dengan ID anime sebagai bagian dari URL
+                window.location.href =
+                    `/anime/${animeId}`; // Ganti '/anime/' dengan route yang sesuai di aplikasi Anda
+            });
+        });
+    </script>
     <script>
         var textContainers = document.querySelectorAll('.textContainer');
 
