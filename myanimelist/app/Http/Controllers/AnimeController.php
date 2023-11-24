@@ -38,7 +38,7 @@ class AnimeController extends Controller
     public function showAnime($animeId)
     {
         try {
-            $apiUrl = 'https://api.jikan.moe/v4/anime/' . $animeId; // Menggunakan ID anime dalam URL
+            $apiUrl = 'https://api.jikan.moe/v4/anime/' . $animeId .'/full'; // Menggunakan ID anime dalam URL
             $response = Http::get($apiUrl);
 
             if ($response->successful()) {
