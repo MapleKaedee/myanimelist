@@ -74,17 +74,13 @@
                 @endphp
                 <button class="join-item btn dark:bg-slate-400 {{ $currentPage == 1 ? 'disabled' : '' }}"
                     @if ($currentPage != 1) onclick="window.location='{{ $paginatedData->previousPageUrl() }}'" @endif>«</button>
-
                 <!-- Tampilkan tombol nomor halaman -->
                 <button class="join-item btn dark:bg-slate-600 dark:border-slate-100 dark:text-slate-100" disabled>Page {{ $currentPage }}</button>
-
                 <button class="join-item btn dark:bg-slate-400 {{ $currentPage == $lastPage ? 'disabled' : '' }}"
                     @if ($currentPage != $lastPage) onclick="window.location='{{ $paginatedData->nextPageUrl() }}'" @endif>»</button>
             </div>
         </div>
     </div>
-
-
 
     <script>
         var textContainers = document.querySelectorAll('.textContainer');
@@ -107,4 +103,5 @@
             container.innerHTML = truncatedText;
         });
     </script>
+    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
 </x-nav-layout>
