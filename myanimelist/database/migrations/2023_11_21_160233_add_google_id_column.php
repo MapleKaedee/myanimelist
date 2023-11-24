@@ -9,19 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('google_id');
-            $table->string('username')->default('default_username'); // Provide a default value
-            $table->string('password')->default(bcrypt('default_password'));
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('google_id')->nullable();
         });
     }
-
 
     /**
      * Reverse the migrations.

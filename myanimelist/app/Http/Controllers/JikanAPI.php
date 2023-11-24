@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -12,24 +11,21 @@ use Illuminate\Support\Facades\Log;
 
 class JikanAPI extends Controller
 {
-    private function fetchAnime()
+
+    public function FetchAnime()
     {
-        // Check if data is cached
         if (Cache::has('cachedAnimeData')) {
             return Cache::get('cachedAnimeData');
         }
 
         $client = new Client();
         $allAnime = [];
-        $animeCount = 0;
-
-        $currentPage = 1; // Halaman awal
-        $lastPage = null;
+        $currentPage = 1;
+        $lastPage = 10;
 
         do {
             try {
                 $response = $client->request('GET', 'https://api.jikan.moe/v4/top/anime?page=' . $currentPage);
-
                 $statusCode = $response->getStatusCode();
 
                 if ($statusCode == 200) {
@@ -42,28 +38,23 @@ class JikanAPI extends Controller
 
                     // ...
 
-                    // Tambahkan waktu tunggu sebelum melakukan permintaan berikutnya
-                    usleep(300000); // Delay 300ms (3/10 detik) sebelum melakukan permintaan lagi
+                    $currentPage++;
 
-                    // ...
-
-                    if ($animeCount < 200 && $data['pagination']['has_next_page']) {
-                        $currentPage++; // Pindah ke halaman selanjutnya
+                    if ($lastPage === null) {
+                        $lastPage = $data['pagination']['last_visible_page'];
                     }
+
+                    usleep(300000); // Delay 300ms (3/10 detik) sebelum melakukan permintaan lagi
                 } else {
-                    // Handle jika respons tidak berhasil
+                    Log::error('Failed to fetch data from API');
                     return response('Failed to fetch data from API', $statusCode);
                 }
             } catch (RequestException $e) {
                 Log::error('RequestException: ' . $e->getMessage());
-                // Handle jika terjadi exception
-                return response('Failed to fetch data from API: ' . $e->getMessage(), $e->getCode());
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 Log::error('Exception: ' . $e->getMessage());
-                // Handle jika terjadi exception lainnya
-                return response('Failed to fetch data from API: ' . $e->getMessage());
             }
-        } while ($animeCount < 200 && $currentPage <= $lastPage);
+        } while ($currentPage <= $lastPage);
 
         // Cache the fetched data for future use
         Cache::put('cachedAnimeData', $allAnime, Carbon::now()->addMinutes(60)); // Cache for 60 minutes
@@ -92,6 +83,7 @@ class JikanAPI extends Controller
         return $paginatedData;
 
     }
+
     public function getAnime()
     {
         $client = new Client();
@@ -104,12 +96,12 @@ class JikanAPI extends Controller
 
     public function showView()
     {
-
         $paginatedData = $this->Anime();
         $specificAnime = $this->getAnime();
-
+        // $allAnime = $this->FetchAnime();
         return view('home.home')
             ->with('paginatedData', $paginatedData)
+            // ->with('allAnime', $allAnime)
             ->with('specificAnime', $specificAnime);
     }
 }

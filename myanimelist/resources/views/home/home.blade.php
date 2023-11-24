@@ -41,7 +41,7 @@
                     </figure>
                     <div class="m-4">
                         <div class="mb-2">
-                            <h1 class="badge text-xs font-semibold">{{ $anime['genres'][0]['name'] }}</h1>
+                            <h1 class="badge text-xs font-semibold">{{ $anime['type'] }}</h1>
                         </div>
                         <h2 class="card-title">{{ $anime['title'] }}</h2>
                         <p class="textContainer dark:text-slate-300">{{ $anime['synopsis'] }}</p>
@@ -52,23 +52,24 @@
                 </div>
             @endforeach
         </div>
-        <div class="join">
-            @php
-                $currentPage = $paginatedData->currentPage();
-                $lastPage = $paginatedData->lastPage();
-            @endphp
-            <button class="join-item btn {{ $currentPage == 1 ? 'disabled' : '' }}"
-                @if ($currentPage != 1) onclick="window.location='{{ $paginatedData->previousPageUrl() }}'" @endif>«</button>
+        <div class="flex justify-center my-6">
+            <div class="join">
+                @php
+                    $currentPage = $paginatedData->currentPage();
+                    $lastPage = $paginatedData->lastPage();
+                @endphp
+                <button class="join-item btn dark:bg-slate-400 {{ $currentPage == 1 ? 'disabled' : '' }}"
+                    @if ($currentPage != 1) onclick="window.location='{{ $paginatedData->previousPageUrl() }}'" @endif>«</button>
 
-            <!-- Tampilkan tombol nomor halaman -->
-            <button class="join-item btn" disabled>Page {{ $currentPage }}</button>
+                <!-- Tampilkan tombol nomor halaman -->
+                <button class="join-item btn dark:bg-slate-600 dark:border-slate-100 dark:text-slate-100" disabled>Page
+                    {{ $currentPage }}</button>
 
-            <button class="join-item btn {{ $currentPage == $lastPage ? 'disabled' : '' }}"
-                @if ($currentPage != $lastPage) onclick="window.location='{{ $paginatedData->nextPageUrl() }}'" @endif>»</button>
+                <button class="join-item btn dark:bg-slate-400 {{ $currentPage == $lastPage ? 'disabled' : '' }}"
+                    @if ($currentPage != $lastPage) onclick="window.location='{{ $paginatedData->nextPageUrl() }}'" @endif>»</button>
+            </div>
         </div>
     </div>
-
-
 
     <script>
         var textContainers = document.querySelectorAll('.textContainer');
@@ -91,4 +92,5 @@
             container.innerHTML = truncatedText;
         });
     </script>
+    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
 </x-nav-layout>

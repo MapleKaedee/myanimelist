@@ -22,4 +22,29 @@ class AnimeController extends Controller
             return redirect()->back()->with('error', 'Failed to fetch anime data.');
         }
     }
+
+    public function fetchTopAnime()
+    {
+        $allTopAnime = [];
+
+        // Define the number of pages you want to fetch
+        $totalPages = 5; // Fetching 5 pages as an example
+
+        for ($page = 1; $page <= $totalPages; $page++) {
+            $response = Http::get('https://api.jikan.moe/v4/top/anime', [
+                'page' => $page,
+            ]);
+
+            if ($response->successful()) {
+                $topAnime = $response->json();
+                $allTopAnime = array_merge($allTopAnime, $topAnime); // Merge results from each page
+            } else {
+                // Handle error if the request was not successful
+                return response()->json(['error' => 'Failed to fetch data'], $response->status());
+            }
+        }
+        dd($allTopAnime);
+        return $allTopAnime;
+    }
+
 }
