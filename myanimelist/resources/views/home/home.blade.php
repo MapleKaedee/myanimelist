@@ -21,11 +21,11 @@
         </div>
     </div>
     {{-- HERO END --}}
-    <div class="join">
+    <div class="mx-12">
         <form method="GET" action="{{ url('/search') }}">
-            <input class="input input-bordered join-item" type="text" name="anime_name"
+            <input class="input input-bordered w-full max-w-xs dark:bg-slate-400" type="text" name="anime_name"
                 placeholder="Enter Anime Name" />
-            <button class="btn join-item rounded-r-full" type="submit">Search</button>
+            <button class="btn btn-outline dark:text-slate-100 dark:border-slate-100" type="submit">Search</button>
         </form>
     </div>
     <div class="m-12">
@@ -37,11 +37,25 @@
             @foreach ($paginatedData as $anime)
                 <div class="card bg-base-100 dark:bg-slate-700 dark:text-white shadow-xl">
                     <figure>
-                        <img class="aspect-auto" src="{{ $anime['images']['jpg']['image_url'] }}" alt="" />
+                        <img class="h-80" src="{{ $anime['images']['jpg']['image_url'] }}" alt="" />
                     </figure>
                     <div class="m-4">
                         <div class="mb-2">
-                            <h1 class="badge text-xs font-semibold">{{ $anime['type'] }}</h1>
+                            <h1 class="badge text-xs font-semibold
+                            @if ($anime['type'] == 'TV' )
+                                badge-primary
+                            @elseif ($anime['type'] == 'Movie' )
+                                badge-secondary
+                            @elseif ($anime['type'] == 'Special')
+                                badge-accent text-white
+                            @elseif ($anime['type'] == 'OVA' )
+                                badge-info text-white
+                            @endif">{{ $anime['type'] }}</h1>
+                        </div>
+                        <div class="mb-2">
+                            @foreach ($anime['genres'] as $genre)
+                            <h1 class="badge text-xs font-semibold">{{ $genre['name'] }}</h1>
+                            @endforeach
                         </div>
                         <h2 class="card-title">{{ $anime['title'] }}</h2>
                         <p class="textContainer dark:text-slate-300">{{ $anime['synopsis'] }}</p>
@@ -60,11 +74,8 @@
                 @endphp
                 <button class="join-item btn dark:bg-slate-400 {{ $currentPage == 1 ? 'disabled' : '' }}"
                     @if ($currentPage != 1) onclick="window.location='{{ $paginatedData->previousPageUrl() }}'" @endif>«</button>
-
                 <!-- Tampilkan tombol nomor halaman -->
-                <button class="join-item btn dark:bg-slate-600 dark:border-slate-100 dark:text-slate-100" disabled>Page
-                    {{ $currentPage }}</button>
-
+                <button class="join-item btn dark:bg-slate-600 dark:border-slate-100 dark:text-slate-100" disabled>Page {{ $currentPage }}</button>
                 <button class="join-item btn dark:bg-slate-400 {{ $currentPage == $lastPage ? 'disabled' : '' }}"
                     @if ($currentPage != $lastPage) onclick="window.location='{{ $paginatedData->nextPageUrl() }}'" @endif>»</button>
             </div>
