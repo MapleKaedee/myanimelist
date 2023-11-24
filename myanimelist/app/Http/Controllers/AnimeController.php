@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Http;
-use GuzzleHttp\Client;
 
 class AnimeController extends Controller
 {
-    public function Anime(){
+    public function Anime()
+    {
         $client = new Client();
         $response = $client->request('GET', 'https://api.jikan.moe/v4/anime/41514');
         $data = json_decode($response->getBody(), true);
@@ -34,6 +35,22 @@ class AnimeController extends Controller
             return redirect()->back()->with('error', 'Failed to fetch anime data.');
         }
     }
+    public function showAnime($animeId)
+    {
+        try {
+            $apiUrl = 'https://api.jikan.moe/v4/anime/' . $animeId; // Menggunakan ID anime dalam URL
+            $response = Http::get($apiUrl);
 
+            if ($response->successful()) {
+                $animeData = $response->json();
 
+                // Lakukan sesuatu dengan $animeData, misalnya menampilkan ke view
+                return view('search.details', compact('animeData'));
+            } else {
+                return redirect()->back()->with('error', 'Failed to fetch anime data. API returned an error.');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to fetch anime data. Please try again later.');
+        }
+    }
 }

@@ -38,10 +38,8 @@ class GoogleController extends Controller
                 $newUser = User::updateOrCreate(['email' => $user->email], [
                     'name' => $user->name,
                     'google_id' => $user->id,
-                    'username' => 'default_username',
-                    'password' => bcrypt('default_password'),
                 ]);
-                
+
                 Auth::login($newUser);
 
                 return redirect()->intended('/');
