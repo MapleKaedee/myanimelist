@@ -23,6 +23,7 @@ Route::get('/', [JikanAPI::class, 'showView'])->name('home');
 Route::get('/profile', [ProfileController::class, 'edit'])->name('dashboard')->middleware(['auth', 'verified']);
 Route::get('/search', [AnimeController::class, 'getAnime'])->name('search');
 Route::get('/fetch-top-anime', [AnimeController::class, 'fetchTopAnime']);
+Route::get('/anime/{animeId}', [AnimeController::class, 'showAnime'])->name('search.details');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
