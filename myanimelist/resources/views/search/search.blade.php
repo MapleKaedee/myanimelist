@@ -32,29 +32,16 @@
                 @foreach ($animeData as $anime)
                     <div class="card bg-base-100 dark:bg-slate-700 dark:text-white shadow-xl">
                         <figure>
-                            <img class="h-80" src="{{ $anime['images']['jpg']['image_url'] }}" alt="" />
+                            <img class="aspect-square" src="{{ $anime['images']['jpg']['image_url'] }}" alt="" />
                         </figure>
                         <div class="m-4">
                             <div class="mb-2">
-                                <h1
-                                    class="badge text-xs font-semibold
-                            @if ($anime['type'] == 'TV') badge-primary
-                            @elseif ($anime['type'] == 'Movie')
-                                badge-secondary
-                            @elseif ($anime['type'] == 'Special')
-                                badge-accent text-white
-                            @elseif ($anime['type'] == 'OVA')
-                                badge-info text-white @endif">
-                                    {{ $anime['type'] }}</h1>
-                            </div>
-                            <div class="mb-2">
-                                @foreach ($anime['genres'] as $genre)
-                                    <h1 class="badge text-xs font-semibold">{{ $genre['name'] }}</h1>
-                                @endforeach
+                                <h1 class="badge text-xs font-semibold">{{ $anime['type'] }}</h1>
                             </div>
                             <h2 class="card-title">{{ $anime['title'] }}</h2>
                             <p class="textContainer dark:text-slate-300">{{ $anime['synopsis'] }}</p>
                             <div class="card-actions justify-end flex items-end">
+
                                 <button class="btn btn-primary anime-button"
                                     data-anime-id="{{ $anime['mal_id'] }}">Details</button>
                             </div>
@@ -74,14 +61,12 @@
             button.addEventListener('click', () => {
                 // Mengambil ID anime dari atribut data-anime-id
                 const animeId = button.getAttribute('data-anime-id');
-
                 // Mengarahkan ke halaman baru dengan ID anime sebagai bagian dari URL
                 window.location.href =
                     `/anime/${animeId}`; // Ganti '/anime/' dengan route yang sesuai di aplikasi Anda
             });
         });
     </script>
-
     <script>
         var textContainers = document.querySelectorAll('.textContainer');
 

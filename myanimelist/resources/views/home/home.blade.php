@@ -41,20 +41,20 @@
                     </figure>
                     <div class="m-4">
                         <div class="mb-2">
-                            <h1
-                                class="badge text-xs font-semibold
-                        @if ($anime['type'] == 'TV') badge-primary
-                        @elseif ($anime['type'] == 'Movie')
-                            badge-secondary
-                        @elseif ($anime['type'] == 'Special')
-                            badge-accent text-white
-                        @elseif ($anime['type'] == 'OVA')
-                            badge-info text-white @endif">
-                                {{ $anime['type'] }}</h1>
+                            <h1 class="badge text-xs font-semibold
+                            @if ($anime['type'] == 'TV' )
+                                badge-primary
+                            @elseif ($anime['type'] == 'Movie' )
+                                badge-secondary
+                            @elseif ($anime['type'] == 'Special')
+                                badge-accent text-white
+                            @elseif ($anime['type'] == 'OVA' )
+                                badge-info text-white
+                            @endif">{{ $anime['type'] }}</h1>
                         </div>
                         <div class="mb-2">
                             @foreach ($anime['genres'] as $genre)
-                                <h1 class="badge text-xs font-semibold">{{ $genre['name'] }}</h1>
+                            <h1 class="badge text-xs font-semibold">{{ $genre['name'] }}</h1>
                             @endforeach
                         </div>
                         <h2 class="card-title">{{ $anime['title'] }}</h2>
