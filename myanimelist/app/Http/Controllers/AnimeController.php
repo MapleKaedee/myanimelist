@@ -21,36 +21,30 @@ class AnimeController extends Controller
 
     public function getAnime(Request $request)
     {
-        $animeName = $request->input('anime_name'); // Assuming the input name is 'anime_name'
+        $animeName = $request->input('anime_name');
         $apiUrl = 'https://api.jikan.moe/v4/anime?q=' . urlencode($animeName);
 
-        try {
-            $specificAnime = $this->Anime();
-            $response = Http::get($apiUrl);
-            $animeData = $response->json()['data'];
+        $specificAnime = $this->Anime(); // Assuming this function gets specific anime data
 
+        $response = Http::get($apiUrl);
+
+        if ($response->successful()) {
+            $animeData = $response->json()['data'];
             return view('search.search', compact('animeData', 'specificAnime'));
-        } catch (\Exception $e) {
-            // Handle errors, e.g., redirect back with an error message
-            return redirect()->back()->with('error', 'Failed to fetch anime data.');
         }
     }
     public function showAnime($animeId)
     {
-        try {
-            $apiUrl = 'https://api.jikan.moe/v4/anime/' . $animeId; // Menggunakan ID anime dalam URL
-            $response = Http::get($apiUrl);
+        $apiUrl = 'https://api.jikan.moe/v4/anime/' . $animeId; // Menggunakan ID anime dalam URL
+        $response = Http::get($apiUrl);
 
-            if ($response->successful()) {
-                $animeData = $response->json();
+        if ($response->successful()) {
+            $animeData = $response->json();
 
-                // Lakukan sesuatu dengan $animeData, misalnya menampilkan ke view
-                return view('search.details', compact('animeData'));
-            } else {
-                return redirect()->back()->with('error', 'Failed to fetch anime data. API returned an error.');
-            }
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to fetch anime data. Please try again later.');
+            // Lakukan sesuatu dengan $animeData, misalnya menampilkan ke view
+            return view('search.details', compact('animeData'));
         }
+
+        return redirect()->back()->with('error', 'Failed to fetch anime data. API returned an error.');
     }
 }

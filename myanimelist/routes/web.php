@@ -6,6 +6,7 @@ use App\Http\Controllers\JikanAPI;
 use App\Http\Controllers\myDashboardController;
 use App\Http\Controllers\myListController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfilePictureController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,9 @@ Route::get('/profile', [ProfileController::class, 'edit'])->name('dashboard')->m
 Route::get('/search', [AnimeController::class, 'getAnime'])->name('search');
 Route::get('/fetch-top-anime', [AnimeController::class, 'fetchTopAnime']);
 Route::get('/anime/{animeId}', [AnimeController::class, 'showAnime'])->name('search.details');
+
+Route::get('/upload', [ProfilePictureController::class, 'showUploadForm'])->name('show.upload.form');
+Route::post('/upload', [ProfilePictureController::class, 'upload'])->name('upload.profile.picture');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

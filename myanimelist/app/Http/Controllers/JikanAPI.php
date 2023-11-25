@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
@@ -23,42 +22,26 @@ class JikanAPI extends Controller
         $currentPage = 1;
         $lastPage = 10;
 
-        do {
-            try {
-                $response = $client->request('GET', 'https://api.jikan.moe/v4/top/anime?page=' . $currentPage);
-                $statusCode = $response->getStatusCode();
+        while ($currentPage <= $lastPage) {
+            $response = $client->request('GET', 'https://api.jikan.moe/v4/top/anime?page=' . $currentPage);
+            $statusCode = $response->getStatusCode();
 
-                if ($statusCode == 200) {
-                    $data = json_decode($response->getBody(), true);
+            if ($statusCode == 200) {
+                $data = json_decode($response->getBody(), true);
+                $allAnime = array_merge($allAnime, $data['data']);
+                $currentPage++;
 
-                    // ... (proses data seperti sebelumnya)
-
-                    // Masukkan data dari halaman saat ini ke dalam array semua anime
-                    $allAnime = array_merge($allAnime, $data['data']);
-
-                    // ...
-
-                    $currentPage++;
-
-                    if ($lastPage === null) {
-                        $lastPage = $data['pagination']['last_visible_page'];
-                    }
-
-                    usleep(300000); // Delay 300ms (3/10 detik) sebelum melakukan permintaan lagi
-                } else {
-                    Log::error('Failed to fetch data from API');
-                    return response('Failed to fetch data from API', $statusCode);
+                if ($lastPage === null) {
+                    $lastPage = $data['pagination']['last_visible_page'];
                 }
-            } catch (RequestException $e) {
-                Log::error('RequestException: ' . $e->getMessage());
-            } catch (\Exception $e) {
-                Log::error('Exception: ' . $e->getMessage());
+                usleep(300000); // Delay 300ms before making the next request
+            } else {
+                Log::error('Failed to fetch data from API');
+                return response('Failed to fetch data from API', $statusCode);
             }
-        } while ($currentPage <= $lastPage);
+        }
 
-        // Cache the fetched data for future use
-        Cache::put('cachedAnimeData', $allAnime, Carbon::now()->addMinutes(60)); // Cache for 60 minutes
-
+        Cache::put('cachedAnimeData', $allAnime, Carbon::now()->addMinutes(60));
         return $allAnime;
     }
 
