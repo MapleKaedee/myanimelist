@@ -123,7 +123,7 @@
                             @auth
                                 <summary class="m-1 btn dark:bg-slate-700 dark:text-white dark:border-slate-500">
                                     {{ auth()->user()->name }} <span><img class="rounded-full" width="36"
-                                            src="https://i.pinimg.com/564x/b6/4e/4e/b64e4e6cf83da7959b22038ef7097105.jpg"
+                                            src="{{ asset('storage/profile_pictures/' . Auth::user()->profile_picture) }}"
                                             alt=""></span></summary>
                                 <ul
                                     class="mt-4 p-2 shadow menu dropdown-content z-[1] bg-base-100 dark:bg-slate-700 rounded-md w-52 gap-2">

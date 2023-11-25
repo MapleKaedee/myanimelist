@@ -41,7 +41,9 @@
                             <h2 class="card-title">{{ $anime['title'] }}</h2>
                             <p class="textContainer dark:text-slate-300">{{ $anime['synopsis'] }}</p>
                             <div class="card-actions justify-end flex items-end">
-                                <button class="btn btn-primary anime-button" data-anime-id="{{ $anime['mal_id'] }}">Watch</button>
+
+                                <button class="btn btn-primary anime-button"
+                                    data-anime-id="{{ $anime['mal_id'] }}">Details</button>
                             </div>
                         </div>
                     </div>
@@ -49,7 +51,6 @@
             @endif
         </div>
     </div>
-
 
     <script>
         // Mengambil semua elemen tombol anime
@@ -60,7 +61,6 @@
             button.addEventListener('click', () => {
                 // Mengambil ID anime dari atribut data-anime-id
                 const animeId = button.getAttribute('data-anime-id');
-
                 // Mengarahkan ke halaman baru dengan ID anime sebagai bagian dari URL
                 window.location.href =
                     `/anime/${animeId}`; // Ganti '/anime/' dengan route yang sesuai di aplikasi Anda
