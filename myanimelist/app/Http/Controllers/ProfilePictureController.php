@@ -21,6 +21,15 @@ class ProfilePictureController extends Controller
 
         $user = Auth::user();
 
+        // Hapus foto lama jika ada
+        if ($user->profile_picture) {
+            $oldImagePath = public_path('storage/profile_pictures/') . $user->profile_picture;
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath);
+            }
+        }
+
+        // Unggah foto baru
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = 'profile_picture_' . time() . '.' . $image->getClientOriginalExtension();
