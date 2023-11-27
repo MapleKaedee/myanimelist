@@ -13,6 +13,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-brands/css/uicons-brands.css'>
     <!-- Scripts -->
     @vite('resources/css/app.css')
     {{-- For Toggle --}}
@@ -52,7 +53,7 @@
     <div class="shadow-md">
         <div class="">
             <div class="navbar">
-                <div class="mx-12 navbar dark:text-slate-300">
+                <div class="mx-6 navbar dark:text-slate-300">
                     <div class="navbar-start">
                         <div class="dropdown">
                             <label tabindex="0" class="btn btn-ghost lg:hidden">
@@ -160,6 +161,21 @@
     <main>
         {{ $slot }}
     </main>
+
+
+    {{-- FOOTER START --}}
+    <div>
+        <footer class="text-slate-600 footer items-center p-4 dark:bg-slate-800 dark:text-slate-400 border-t dark:border-slate-600">
+            <aside class="items-center grid-flow-col">
+                <img class="w-10" src="{{ asset('icon/lifebuoy.png') }}" alt="">
+                <p>Copyright © 2023 - All right reserved</p>
+            </aside>
+            <nav class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+                <a target="_blank" href="https://github.com/"><i class="fi fi-brands-github text-xl dark:hover:text-slate-300 duration-300"></i></a>
+            </nav>
+          </footer>
+    </div>
+      {{-- FOOTER END --}}
 
     {{-- Script --}}
     <script>
