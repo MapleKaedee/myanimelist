@@ -42,7 +42,7 @@ class AnimeController extends Controller
             $animeData = $response->json();
 
             // Lakukan sesuatu dengan $animeData, misalnya menampilkan ke view
-            return view('search.details', compact('animeData'));
+            return view('search.Details', compact('animeData'));
         }
 
         return redirect()->back()->with('error', 'Failed to fetch anime data. API returned an error.');
