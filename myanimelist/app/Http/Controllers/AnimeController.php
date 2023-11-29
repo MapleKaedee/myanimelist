@@ -37,8 +37,9 @@ class AnimeController extends Controller
     {
         $apiUrl = 'https://api.jikan.moe/v4/anime/' . $animeId; // Menggunakan ID anime dalam URL
         $response = Http::get($apiUrl);
-        // $response -> successful();
-        // $animeData = $response->json();
+        $response -> successful();
+        $animeData = $response->json();
+        // dd($animeData);
 
         if ($response->successful()) {
             $animeData = $response->json();
@@ -46,7 +47,7 @@ class AnimeController extends Controller
             // Lakukan sesuatu dengan $animeData, misalnya menampilkan ke view
             return view('search.details', compact('animeData'));
         }
-        // dd($animeData);
+
 
         return redirect()->back()->with('error', 'Failed to fetch anime data. API returned an error.');
     }
