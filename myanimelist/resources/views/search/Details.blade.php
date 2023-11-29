@@ -120,14 +120,12 @@
                         <div class="col-span-2 mt-2 ml-2">
                             <h1 class="font-semibold">Alternative Title</h1>
                             <div class="ml-2 pb-2">
-                                <p class="text-sm text-slate-400"><span class="text-black dark:text-slate-200 font-semibold">Synonyms :</span> {{ $anime['title_synonyms'][0] }}</p>
                                 <p class="text-sm text-slate-400"><span class="text-black dark:text-slate-200 font-semibold">Japanese :</span> {{ $anime['title_japanese'] }}</p>
                                 <p class="text-sm text-slate-400"><span class="text-black dark:text-slate-200 font-semibold">English :</span> {{ $anime['title_english'] }}</p>
                             </div>
 
                             <h1 class="font-semibold mt-2">Details</h1>
                             <div class="ml-2">
-                                <p class="text-sm text-slate-400"><span class="text-black dark:text-slate-200 font-semibold">Demographic :</span> {{ $anime['demographics'][0]['name'] }}</p>
                                 <p class="text-sm text-slate-400"><span class="text-black dark:text-slate-200 font-semibold">Aired :</span> {{ $anime['aired']['string'] }}</p>
                                 <p class="text-sm text-slate-400"><span class="text-black dark:text-slate-200 font-semibold">Episodes :</span> {{ $anime['episodes'] }}</p>
                                 <p class="text-sm text-slate-400"><span class="text-black dark:text-slate-200 font-semibold">Duration :</span> {{ $anime['duration'] }}</p>
