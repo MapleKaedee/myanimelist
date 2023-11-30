@@ -26,7 +26,7 @@
         <div class="grid md:grid-cols-3 sm:grid-cols-1 md:gap-6">
             <div class="grid justify-items-center">
                 <img class="rounded-sm" src="{{ $anime['images']['jpg']['large_image_url'] }}" alt="">
-                <iframe class="w-full aspect-video mt-4 rounded-sm" src="{{ $anime['trailer']['embed_url'] }}"></iframe>
+
             </div>
             <div class="sm:col-span-2">
                 <h1 class="text-4xl font-bold dark:text-slate-100">{{ $anime['title'] }}</h1>
@@ -58,6 +58,20 @@
                     </div>
                     <div class="grid col-span-2 justify-items-end">
                         <button class="btn btn-primary sm:btn-md btn-sm"><i class="fas fa-plus p-1 rounded-sm hidden sm:inline bg-blue-100 text-primary"></i> Add To My List</button>
+                        <!-- Open the modal using ID.showModal() method -->
+                        <button class="btn btn-sm btn-outline font-normal hover:text-white mt-2 dark:border-white dark:hover:bg-slate-700 dark:text-slate-100" onclick="my_modal_5.showModal()">Trailer</button>
+                        <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle ">
+                        <div class="modal-box dark:bg-slate-700">
+                            <h3 class="font-bold text-lg dark:text-slate-200">{{ $anime['title'] }}</h3>
+                            <iframe class="w-full aspect-video mt-4 rounded-md" src="{{ $anime['trailer']['embed_url'] }}"></iframe>
+                            <div class="modal-action">
+                            <form method="dialog">
+                                <!-- if there is a button in form, it will close the modal -->
+                                <button class="btn">Close</button>
+                            </form>
+                            </div>
+                        </div>
+                        </dialog>
                     </div>
                 </div>
                 <div class="mt-6 grid sm:grid-cols-4 grid-cols-2">
@@ -106,14 +120,19 @@
                         <div class="col-span-2 mt-2 ml-2">
                             <h1 class="font-semibold">Alternative Title</h1>
                             <div class="ml-2 pb-2">
-                                <p class="text-sm text-slate-400"><span class="text-black dark:text-slate-200 font-semibold">Synonyms :</span> {{ $anime['title_synonyms'][0] }}</p>
+                                @if(count($anime['title_synonyms']) != 0)
+                                    <p class="text-sm text-slate-400"><span class="text-black dark:text-slate-200 font-semibold">Synonyms :</span> {{ $anime['title_synonyms'][0] }}</p>
+                                @endif
                                 <p class="text-sm text-slate-400"><span class="text-black dark:text-slate-200 font-semibold">Japanese :</span> {{ $anime['title_japanese'] }}</p>
                                 <p class="text-sm text-slate-400"><span class="text-black dark:text-slate-200 font-semibold">English :</span> {{ $anime['title_english'] }}</p>
                             </div>
 
                             <h1 class="font-semibold mt-2">Details</h1>
                             <div class="ml-2">
+                                <p class="text-sm text-slate-400"><span class="text-black dark:text-slate-200 font-semibold">Aired :</span> {{ $anime['aired']['string'] }}</p>
+                                @if (count($anime['demographics']) !=0)
                                 <p class="text-sm text-slate-400"><span class="text-black dark:text-slate-200 font-semibold">Demographic :</span> {{ $anime['demographics'][0]['name'] }}</p>
+                                @endif
                                 <p class="text-sm text-slate-400"><span class="text-black dark:text-slate-200 font-semibold">Episodes :</span> {{ $anime['episodes'] }}</p>
                                 <p class="text-sm text-slate-400"><span class="text-black dark:text-slate-200 font-semibold">Duration :</span> {{ $anime['duration'] }}</p>
                                 <p class="text-sm text-slate-400"><span class="text-black dark:text-slate-200 font-semibold">Sources :</span> {{ $anime['source'] }}</p>
