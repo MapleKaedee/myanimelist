@@ -74,7 +74,9 @@
                         </ul>
                       </li> --}}
                                 <li><a href="/mylist" class="font-semibold">My List</a></li>
-                                <li><a href="/mydashboard/{id}" class="font-semibold">Dashboard</a></li>
+                                @if (Auth::check() && Auth::user()->role === 'admin')
+                                    <li><a href="/mydashboard/{id}" class="font-semibold">Dashboard</a></li>
+                                @endif
                             </ul>
                         </div>
                         <a href="/" class="btn btn-ghost text-xl font-bold">My<span
@@ -93,7 +95,10 @@
                       </details>
                     </li> --}}
                             <li><a href="/mylist/{id}" class="font-semibold dark:hover:bg-slate-400">My List</a></li>
-                            <li><a href="/mydashboard/{id}" class="font-semibold dark:hover:bg-slate-400">Dashboard</a>
+                            @if (Auth::check() && Auth::user()->role === 'admin')
+                                <li><a href="/mydashboard/{id}"
+                                        class="font-semibold dark:hover:bg-slate-400">Dashboard</a>
+                            @endif
                             </li>
                         </ul>
                     </div>
@@ -165,17 +170,19 @@
 
     {{-- FOOTER START --}}
     <div>
-        <footer class="text-slate-600 footer items-center p-4 dark:bg-slate-800 dark:text-slate-400 border-t dark:border-slate-600">
+        <footer
+            class="text-slate-600 footer items-center p-4 dark:bg-slate-800 dark:text-slate-400 border-t dark:border-slate-600">
             <aside class="items-center grid-flow-col">
                 <img class="w-10" src="{{ asset('icon/lifebuoy.png') }}" alt="">
                 <p>Copyright © 2023 - All right reserved</p>
             </aside>
             <nav class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-                <a target="_blank" href="https://github.com/"><i class="fi fi-brands-github text-xl dark:hover:text-slate-300 duration-300"></i></a>
+                <a target="_blank" href="https://github.com/"><i
+                        class="fi fi-brands-github text-xl dark:hover:text-slate-300 duration-300"></i></a>
             </nav>
-          </footer>
+        </footer>
     </div>
-      {{-- FOOTER END --}}
+    {{-- FOOTER END --}}
 
     {{-- Script --}}
     <script>
