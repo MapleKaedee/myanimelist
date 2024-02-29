@@ -75,7 +75,7 @@
                       </li> --}}
                                 <li><a href="/mylist" class="font-semibold">My List</a></li>
                                 @if (Auth::check() && Auth::user()->role === 'admin')
-                                    <li><a href="/mydashboard/{id}" class="font-semibold">Dashboard</a></li>
+                                    <li><a href="/admin" class="font-semibold">Dashboard</a></li>
                                 @endif
                             </ul>
                         </div>
@@ -96,8 +96,7 @@
                     </li> --}}
                             <li><a href="/mylist/{id}" class="font-semibold dark:hover:bg-slate-400">My List</a></li>
                             @if (Auth::check() && Auth::user()->role === 'admin')
-                                <li><a href="/mydashboard/{id}"
-                                        class="font-semibold dark:hover:bg-slate-400">Dashboard</a>
+                                <li><a href="/admin" class="font-semibold dark:hover:bg-slate-400">Dashboard</a>
                             @endif
                             </li>
                         </ul>

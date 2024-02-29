@@ -8,6 +8,9 @@ export default {
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
         "./node_modules/flowbite/**/*.js",
+        "./app/Filament/**/*.php",
+        "./resources/views/filament/**/*.blade.php",
+        "./vendor/filament/**/*.blade.php",
     ],
     darkMode: "class",
 
