@@ -10,8 +10,9 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class AnimePost extends Model implements HasMedia
 {
-    protected $fillable = ['title', 'synopsis', 'uploadby', 'link', 'date'];
+    protected $fillable = ['title', 'synopsis', 'uploadby', 'link', 'date', 'image', 'media_id'];
     use HasFactory;
     use SoftDeletes;
     use InteractsWithMedia;
+
 }
